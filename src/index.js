@@ -12,14 +12,18 @@ async function getCurrency(usd) {
   }
 } 
 
+
 // UI Logic
 function printElements(response, usd) {
   const resultContainer = document.querySelector('#displayResults');
-  resultContainer.innerText = `Here is the current rate for $${usd}.`;
+  resultContainer.innerHTML = '';
+  const amount = parseFloat(document.querySelector('#currency').value) || 1;
+  resultContainer.innerText = `Here is the converted amount for $${amount} USD:`;
 
   for(const [currency, rate] of Object.entries(response.conversion_rates)) {
+    const convert = (amount * rate).toFixed(2);
     const listItems = document.createElement("li");
-    listItems.textContent = `${currency}: ${rate}`;
+    listItems.textContent = `${currency}: ${convert}`;
     resultContainer.appendChild(listItems);
   }
 }
