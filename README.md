@@ -1,6 +1,6 @@
-# (Application Name)
+# Currency Exchange
 
-#### (Brief Description of Application)
+#### Currency exchange application. where a user should be able to type in an amount (in U.S. dollars) and then choose which currency it should be converted to (such as francs, marks, rupees, and so on). 
 
 #### By Zuri Gallegos 👩🏾‍💻
 
@@ -17,9 +17,12 @@
 
 ## Description
 
+
+
 ## Setup/Installation Requirements ⚙️ 🖥️
 * _You can clone this repository, you can do this by going to this link <url>_
 * _follow the link above and click on the <>Code button then click on the copy button. Wherever you are storing your projects on your computer, use this git command: git clone url-of-remote-repo. A new folder should be created on your computer and you can navigate it now._
+* Once you have done create a .env file and add it to your .gitignore. Here is where you can store your API_KEY
 * _You can also fork this repository by clicking the "Fork" button in the remote repository._
 <!-- ![My_Image](/src/assets/images/fork.jpeg) -->
 * _Click "create new fork" and then select your account as the "Owner", after this you have your own copy of this repository to your GitHub Account._
@@ -39,8 +42,8 @@ once is clone following these prompts to install all the packages.
 
 ## Known Bugs
 
-* _Any known issues_
-* _should go here_
+* _No known issues_
+
 
 ## License
 

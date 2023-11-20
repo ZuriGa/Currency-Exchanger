@@ -3,58 +3,81 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './css/styles.css';
 import CurrencyExchange from './js/currencyEx.js';
 
-async function getCurrency(usd) {
-  const response = await CurrencyExchange.getCurrency(usd);
+async function getCurrency(fromCurrency) {
+  const response = await CurrencyExchange.getCurrency(fromCurrency);
   if (response) {
-    printElements(response, usd);
+    printElements(response, fromCurrency);
   } else {
-    printError(response, usd);
+    printError(response, fromCurrency);
   }
 } 
 
+function currencyDropDown(dropDownId, selectedCurrency) {
+    const dropDown = document.getElementById(dropDownId);
+    const currencies = ['USD', 'EUR', 'JPY', 'GBP', 'AUD', 'CAD', 'CHF', 'CNH', 'HKD', 'NZD', 'BHD', 'KWD', 'IDR', 'MXN'];
 
+    currencies.forEach((currency) => {
+        const option = document.createElement('option');
+        option.value = currency;
+        option.text = currency;
+        dropDown.add(option);
+    });
+
+    dropDown.value = selectedCurrency;
+}
 // UI Logic
-function printElements(response, usd) {
+function convertAmount(amount, rate) {
+    return (amount * rate).toFixed(2);
+}
+function printElements(response, fromCurrency) {
   const resultContainer = document.querySelector('#displayResults');
   resultContainer.innerHTML = '';
-  const amount = parseFloat(document.querySelector('#currency').value) || 1;
-  resultContainer.innerText = `Here is the converted amount for $${amount} USD:`;
+
+  const amount = parseFloat(document.querySelector('#amount').value) || 1;
+  const selectedCurrency = document.querySelector('#to-currency').value;
+  resultContainer.innerText = `Here is the converted amount for $${amount} ${fromCurrency}:`;
+
 
   for(const [currency, rate] of Object.entries(response.conversion_rates)) {
-    const convert = (amount * rate).toFixed(2);
-    const listItems = document.createElement("li");
-    listItems.textContent = `${currency}: ${convert}`;
-    resultContainer.appendChild(listItems);
+    if (currency === selectedCurrency) {
+    const convertedAmount = convertAmount(amount, rate);
+    const listItem = document.createElement("li");
+    listItem.textContent = `${currency}: ${convertedAmount}`;
+    resultContainer.appendChild(listItem);
+    }
   }
 }
 
-function printError(error, usd) {
+function printError(error, fromCurrency) {
     let errorMessage = '';
     
-    if (!usd || !isValidUsd(usd)) {
-        errorMessage = `Invalid currency: ${usd}. Please enter a valid currency.`;
+    if (!fromCurrency || !isValidUsd(fromCurrency)) {
+        errorMessage = `Invalid currency: ${fromCurrency}. Please enter a valid currency.`;
     } else {
-        errorMessage = `There was an error accessing your currency exchange for ${usd}: ${error}`
+        errorMessage = `There was an error accessing your currency exchange for ${fromCurrency}: ${error}`
     }
     document.querySelector('#displayResults').innerText = errorMessage;
 }
 
-function isValidUsd(usd) {
-    return usd.length >= 0;
+function isValidUsd(fromCurrency) {
+    return fromCurrency.length >= 0;
 }
 
 function handleFormSubmission(e) {
     e.preventDefault();
-    const usd = document.querySelector('#currency').value;
-    document.querySelector('#currency').value;
+    const fromCurrency = document.querySelector('#from-currency').value;
+    const toCurrency = document.querySelector('#to-currency').value;
 
-    if(isValidUsd(usd)) {
-        getCurrency(usd);
+    if(isValidUsd(fromCurrency)) {
+        getCurrency(fromCurrency);
     } else {
-        printError('Invalid currency. Please enter a valid amount.', usd);
+        printError('Invalid currency. Please enter a valid amount.', fromCurrency);
     }
 }
 
 window.addEventListener("load", function () {
-    document.querySelector('form').addEventListener("submit", handleFormSubmission);
+    currencyDropDown('from-currency', 'USD');
+    currencyDropDown('to-currency', 'MXN');
+    const submitButton = this.document.getElementById("submit");
+    submitButton.addEventListener("click", handleFormSubmission);
 });
