@@ -1,6 +1,6 @@
 # Currency Exchange
 
-#### Currency exchange application. where a user should be able to type in an amount (in U.S. dollars) and then choose which currency it should be converted to (such as francs, marks, rupees, and so on). 
+#### Currency exchange application. where a user can type in an amount and then choose which currency it should be converted to (such as francs, marks, rupees, and so on). 
 
 #### By Zuri Gallegos 👩🏾‍💻
 
