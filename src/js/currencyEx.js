@@ -1,5 +1,6 @@
 // Business Logic   
 export default class CurrencyExchange {
+  
   static async getCurrency(fromCurrency) {
     try {
       const response = await fetch(`https://v6.exchangerate-api.com/v6/${process.env.API_KEY}/latest/${fromCurrency}`);
