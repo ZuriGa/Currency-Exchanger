@@ -68,7 +68,7 @@ select {
     background-image: url(../assets/images/dropdown.png);
     background-repeat: no-repeat;
     background-position: right 15px top 50%, center;
-    background-size: 20px 20px;
+    background-size: 30px 30px;
     background-color: rgb(44, 124, 124);
     color: white;
 }

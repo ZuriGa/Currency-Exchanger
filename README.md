@@ -20,7 +20,7 @@
 
 
 ## Setup/Installation Requirements ⚙️ 🖥️
-* _You can clone this repository, you can do this by going to this link <url>_
+* _You can clone this repository, you can do this by going to this link https://github.com/ZuriGa/Currency-Exchanger.git_
 * _follow the link above and click on the <>Code button then click on the copy button. Wherever you are storing your projects on your computer, use this git command: git clone url-of-remote-repo. A new folder should be created on your computer and you can navigate it now._
 * Once you have done create a .env file and add it to your .gitignore. Here is where you can store your API_KEY
 * _You can also fork this repository by clicking the "Fork" button in the remote repository._
