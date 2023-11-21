@@ -10,7 +10,7 @@ async function getCurrency(fromCurrency) {
   } else {
     printError(response, fromCurrency);
   }
-} 
+}
 
 function currencyDropDown(dropDownId, selectedCurrency) {
     const dropDown = document.getElementById(dropDownId);
@@ -30,7 +30,6 @@ function convertAmount(amount, rate) {
     return (amount * rate).toFixed(2);
     
 }
-
 
 
 // UI Logic
