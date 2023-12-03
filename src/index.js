@@ -7,9 +7,7 @@ async function getCurrency(fromCurrency) {
   const response = await CurrencyExchange.getCurrency(fromCurrency);
   if (response) {
     printElements(response, fromCurrency);
-  } else {
-    printError(response, fromCurrency);
-  }
+  } 
 } 
 
 function currencyDropDown(dropDownId, selectedCurrency) {
@@ -42,24 +40,20 @@ function printElements(response, fromCurrency) {
   const selectedCurrency = document.querySelector('#to-currency').value;
   resultContainer.innerText = `$${amount} ${fromCurrency}:`;
 
-//   if (selectedCurrency in response.conversion_rates) {
-//     const rate = response.conversion_rates[selectedCurrency];
-//     const convertedAmount = convertAmount(amount, rate);
-//     const listItem = document.createElement("p");
-//     listItem.textContent = ` ${selectedCurrency} ${convertedAmount}`;
-//     resultContainer.appendChild(listItem);
-//   } else {
-//     printError(`Conversion rate for ${selectedCurrency} not available.`, selectedCurrency);
-//   }
-
-
-  for(const [currency, rate] of Object.entries(response.conversion_rates)) {
+  if (response.result && response.result === 'error') {
+    printError(`Error: ${response.error}`, fromCurrency);
+  } else if (response.conversion_rates ) {
+    for(const [currency, rate] of Object.entries(response.conversion_rates)) {
     if (currency === selectedCurrency) {
     const convertedAmount = convertAmount(amount, rate);
     const listItem = document.createElement("p");
     listItem.textContent = ` = ${currency} ${convertedAmount}`;
     resultContainer.appendChild(listItem);
+  }
+
     }
+  } else {
+    printError('Conversion rates not available', fromCurrency);
   }
 }
 
